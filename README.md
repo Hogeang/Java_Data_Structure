@@ -8,7 +8,7 @@ Java 자료구조 ( Data_Structure )
 - Depth First Search - Tree Preorder
 - Queue
 - Breadth First Search - Tree Level Traversal
-- Binary Tree
+- Binary Tree ( 자식 Tree가 양쪽 삭제일시 미구현 )
 - Hash function : divide
 - Hash function : digits folding
 - Hash function : Open Addressing : Linear Probing
