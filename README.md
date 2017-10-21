@@ -5,9 +5,9 @@ Java 자료구조 ( Data_Structure )
   
 - List
 - Stack
-- Depth First Search
+- Depth First Search - Tree Preorder
 - Queue
-- Breadth First Search
+- Breadth First Search - Tree Level Traversal
 - Binary Tree
 - Hash function : divide
 - Hash function : digits folding
