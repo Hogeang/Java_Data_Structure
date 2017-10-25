@@ -1,11 +1,13 @@
 import java.util.*;
 //위상 정렬  ( VOG , DAG )
+//사이클은 싱크 , 소스가 있는지 확인하고 막음.
 class Graph{
-
-    char [] Name;
-    boolean [] Node;
-    int [][] Edge;
+    char [] Name; // 노드 이름 (a,b,c,d... )
+    char [] Result; // 위상 정렬 결과 담는 배열
+    boolean [] Node; // 방문 노드 확인
+    int [][] Edge; // 그래프 확인
     public Graph(){
+        Result = new char[0];
         Node = new boolean[0];
         Edge = new int[0][0];
         Name = new char[0];
@@ -13,6 +15,7 @@ class Graph{
     public Graph(int Size){
         Scanner scanner = new Scanner(System.in);
         Name = new char[Size];
+        Result = new char[Size];
         Node = new boolean[Size];
         Edge = new int[Size][Size];
         for(int i=0;i<Size;i++) {
@@ -66,35 +69,45 @@ class Graph{
         return findEdge;
     }
 
-    public void findPath(char start, char end){
-        int find = 0;
-        char find_Path = '0';
+    // 위상 정렬 함수
+    public void topologcial_Sort(Graph graph,char start){
+        int Temp = 0; // 싱크의 갯수
+        int nodeFind = 0; // 노드 찾을 위치
         for(int i=0;i<Name.length;i++){
             if(Name[i] == start){
-                find = i;
-                Node[i] = true;
-                find_Path = Name[i];
+                nodeFind = i;
             }
+        } // 위치 파악중 찾아보기
 
+        Node[nodeFind] = true; // 방문했다고 확인
+        Result[nodeFind] = start; // 해당 경로 삽입
+        for(int i=0;i<this.Node.length;i++){
+            Edge[nodeFind][i] = 0; // 간선을 다 끊는다
         }
 
-        if(find_Path == end) {
-            System.out.println("경로가 있습니다.");
+        // 모두 들렀는지 확인 ( 모두 들렀다면 위상 정렬이 끝났으므로 종료 )
+        for(int i=0;i<this.Node.length;i++)
+        {
+            if(Node[i] == false) Temp++;
+        }
+        if(Temp == 0) {
+            for(int i=0;i<this.Node.length;i++)
+                System.out.println("경로 " + (i+1) + ": " + Result[i]);
             return;
         }
 
         for(int i=0;i<this.Node.length;i++){
-            // 목적지를 찾았을 경우
-            // 가는 경로가 존재시 ( 방문하지 않은 행 )
-            if((Edge[find][i] == 1)&& (Node[i] == false)){
-                 findPath(Name[i],end);
-            }
-            if(i==this.Node.length-1){
-                System.out.println("해당 경로는 없습니다.");
+            int node_Temp = 0; // 싱크를 찾기 위한 임시 변수
+            for(int j=0;j<this.Node.length;j++){
+                if(Node[i]==false){
+                    if(Edge[j][i] == 1) node_Temp++;  // 해당 경로에 가는 방향이 있는지 확인
+                    // 싱크인것이 확인되었으므로 다시 위상정렬
+                    if(j==this.Node.length-1 && node_Temp == 0){
+                        graph.topologcial_Sort(graph,Name[i]); // 싱크인지 확인된다면 다시 함수 사용
+                    }
+                }
             }
         }
-
-
     }
 }
 
@@ -124,7 +137,7 @@ public class Main {
                   end =  scanner.next().charAt(0);
                   findEdge = graph.find(start,end);
                   if(findEdge == true)
-                  graph.findPath(start,end);
+                  graph.topologcial_Sort(graph,start);
                   else
                       System.out.println("Sink, Source가 아닙니다.");
               break;
