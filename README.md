@@ -7,11 +7,11 @@
 
 기본적인 이론은 JaeYeopHan님의 설명을 보시면 되겠습니다.
 
-* [List]()
-* [Stack]()
-* [Depth First Search - Tree Preorder]()
-* [Queue]()
-* [Breadth First Search - Tree Level Traversal]()
+* [List](#list)
+* [Stack](#stack)
+* [Depth First Search - Tree Preorder](#depth-first-search---tree-preorder)
+* [Queue](#queue)
+* [Breadth First Search - Tree Level Traversal](#breadth-first-search---tree-level-traversal)
 * Binary Tree ( 자식 Tree가 양쪽 삭제일시 미구현 )
 * Priority Queue
 * Hash function : divide
@@ -124,7 +124,7 @@ else if((Position == 1) && (Number>1)){
 
 ```
 
-[위로]()
+[위로](#data-structure)
 
 
 
@@ -210,7 +210,7 @@ else if((Position == 1) && (Number>1)){
   }
 ```
 
-[위로]()
+[위로](#data-structure)
 
 
 
@@ -307,7 +307,7 @@ else if((Position == 1) && (Number>1)){
 
 
 
-[위로]()
+[위로](#data-structure)
 
 
 
@@ -385,7 +385,7 @@ else if((Position == 1) && (Number>1)){
 
 ```
 
-[위로]()
+[위로](#data-structure)
 
 ## Breadth First Search - Tree Level Traversal
 
@@ -487,4 +487,4 @@ public void BFS(BFS bfs,int i,int End){
     } 
 ```
 
-[위로]()
+[위로](#data-structure)
